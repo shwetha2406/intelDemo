@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Customer Form";
+}
+
+<form asp-controller="Home" asp-action="CustomerAdd" method="post">
+    <fieldset>
+        <div>
+            <label for="Name1">Name:</label>
+            <input type="text" name="Name1" value="" />
+        </div>
+        <div>
+            <label for="Company">Company Name:</label>
+            <input type="text" name="Company" value="" />
+        </div>
+        <div>
+            <label for="Department">Department Name:</label>
+            <input type="text" name="Department" value="" />
+        </div>
+        <div>
+            <input id="submit" type="submit" value="CustomerAdd" />
+        </div>
+    </fieldset>
+</form>
+</<br />
+
+<div>
+    <h3 style="color:gold">@ViewBag.Name</h3>
+    <h3 style="color:gold">@ViewBag.CompanyName</h3>
+    <h3 style="color:gold">@ViewBag.DepartmentName</h3>
+</div>
