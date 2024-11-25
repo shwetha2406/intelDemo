@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Calculator View";
+}
+
+<form asp-controller="MyCalController" method="post">
+    Enter Num1: <input name="Text1"  type="text" /><br />
+    Enter Num2: <input name="Text2"  type="text" /><br />
+  @*   formaction - overrides action attribute. Used with Type submit and image. *@
+    <input type="submit" value="+" formaction="Add" /><span />
+    <input type="submit" value="-" formaction="Minus" /><span />
+    <input type="submit" value="*" formaction="Multiply" /><span />
+    <input type="submit" value="/" formaction="Divide" /><span />
+</form>
+<h2 style="color:springgreen">@ViewBag.Result</h2>
+
