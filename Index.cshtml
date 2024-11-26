@@ -3,5 +3,29 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h3 class="display-4">Welcome</h3>
 </div>
+
+<form asp-controller="Home" asp-action="AddDetail" method="post">
+<h3>Select your choice:</h3>
+@{
+  var listItems = ViewBag.CloudProviders as List<SelectListItem>;
+}
+
+@Html.DropDownList("CloudProviders", listItems, "Select a cloud Provider")
+
+<div>
+   <h3>Select an Device:</h3>
+    Phone: <input type="radio" id="Phone" name="electroic" value="phone" />
+    Ipad: <input type="radio" id="Ipad" name="electroic" value="Ipad" />
+    Laptop: <input type="radio" id="Laptop" name="electroic" value="Laptop" />
+</div>
+<input id="submit" type="submit" value="AddDetail" />
+</form>
+
+@if (ViewBag.SelectedCloudProvider != null && ViewBag.SelectedDevice !=null)
+{
+    <h3>Selected:</h3>
+    <p>Selected Cloud Provider: @ViewBag.SelectedCloudProvider</p>
+    <p>Selected Device: @ViewBag.SelectedDevice</p>
+}

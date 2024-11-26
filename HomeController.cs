@@ -1,5 +1,6 @@
 using IntelDemo.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
 
 namespace IntelDemo.Controllers
@@ -13,8 +14,21 @@ namespace IntelDemo.Controllers
             _logger = logger;
         }
 
+        [HttpPost]
         public IActionResult Index()
         {
+            var CloudProviders = new List<SelectListItem>
+            {
+                new SelectListItem {Text="Azure", Value="Azure"},
+                new SelectListItem {Text="AWS", Value="AWS"},
+                new SelectListItem {Text="GCP", Value="GCP"}
+            };
+            ViewBag.CloudProviders = CloudProviders;
+            string Electronic = HttpContext.Request.Form["electronic"];
+            Console.WriteLine($"Selected Cloud Provider: {CloudProviders}");
+            Console.WriteLine($"Selected Device: {Electronic}");
+            ViewBag.SelectedCloudProvider = CloudProviders;
+            ViewBag.SelectedDevice = Electronic;
             return View();
         }
 

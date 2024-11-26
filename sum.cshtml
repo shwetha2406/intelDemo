@@ -10,3 +10,29 @@
 </form>
 
 <h3>@ViewBag.SumResult</h3>
+
+<div>
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+            {
+                Text = "Azure",
+                Value = "Azure"
+            });
+    listItems.Add(new SelectListItem
+            {
+                Text = "AWS",
+                Value = "AWS",
+            });
+    listItems.Add(new SelectListItem
+            {
+                Text = "GCP",
+                Value = "GCP"
+            });
+
+}
+ @Html.DropDownList("CloudProvider",listItems,"Select a Cloud Provider", new {@class = "form-control"})
+</div>
+<br />
+
+<a href="@Url.Action("Index","Home")">Back</a>
