@@ -26,3 +26,44 @@ at2.activity_type = 'end' group by at1.machine_id;
 
 Select employee.name, bonus.bonus from employee left join bonus on employee.empId = bonus.empId where bonus < 1000 or bonus is null;
 
+--cross join (Cartesian product - every student row will be combined with every subject row) 
+Select Students.student_id, students.student_name, subjects.subject_name, 
+count(examinations.student_id) as attended_exams 
+from students 
+cross join subjects 
+left join examinations
+on  Students.student_id = examinations.student_id 
+and subjects.subject_name = examinations.subject_name  
+group by Students.student_id, students.student_name, subjects.subject_name  
+order by Students.student_id, subjects.subject_name;
+
+Select empy.name from employee as empy
+join employee as emp
+on empy.id = emp.managerId
+group by empy.name
+having count(emp.managerId) >=5;
+
+select name from employee where id in 
+(select managerid from employee group by managerid having count(*)>=5);
+
+--SELECT 
+--    CASE expression
+--        WHEN value1 THEN result1
+--        WHEN value2 THEN result2
+--        ELSE result3
+--    END AS alias_name
+--FROM table_name;
+
+--CAST(value to be converted AS convert datatype)
+
+Select signups.user_id, 
+round(cast(count(case 
+when action = 'confirmed'
+then 1 
+else null end)as float)/count(*),2) as confirmation_rate
+from signups
+left join confirmations
+on signups.user_id = confirmations.user_id
+group by signups.user_id;
+
+
