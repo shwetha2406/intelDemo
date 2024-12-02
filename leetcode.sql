@@ -67,3 +67,26 @@ on signups.user_id = confirmations.user_id
 group by signups.user_id;
 
 
+Select * from Cinema where description != 'boring' and id%2 = 1 order by rating desc;
+
+--ISNULL(expression, if expression null-replacement_value) and 1.0 for floating division
+--COALESCE(expression1, expression2, ..., expressionN)- return first non-null value. If all values are NULL, it returns NULL.
+Select p.product_id, isnull(round(sum(p.price*u.units*1.0) / sum(u.units),2),0) as average_price from prices p
+left join unitssold u
+on p.product_id = u.product_id 
+and purchase_date between start_date and end_date
+group by p.product_id;
+
+Select p.project_id, round(avg(experience_years*1.0),2) as average_years 
+from project p inner join employee e
+on p.employee_id = e.employee_id group by project_id;
+
+SELECT r.contest_id,round(count(distinct r.user_id)*100.0/(select count(*) from users),2) as percentage
+from register r group by r.contest_id
+order by percentage desc, r.contest_id asc;
+
+Select  query_name,
+round(avg(rating * 1.0 / position),2) as quality,
+round(sum(case when rating < 3 then 1 else 0 end) * 100.0 / count(*), 2) as poor_query_percentage
+from queries where query_name is not null group by query_name;
+
